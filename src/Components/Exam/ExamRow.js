@@ -2,9 +2,9 @@ const ExamRow = (props) => {
   return (
     <tr>
       <td>
-        <a href="/home" className="text-decoration-none">
+        <p className="text-primary">
           {props.description}
-        </a>
+        </p>
       </td>
       <td> {props.reading}</td>
       <td> {props.writing}</td>

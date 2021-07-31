@@ -3,28 +3,21 @@ import { Link } from "react-router-dom";
 import AuthContext from "../../context/auth-context";
 import { useContext } from "react";
 import { useHistory } from "react-router";
+import classes from "./SideBar.module.css";
 
 const SideBar = () => {
   const authCtx = useContext(AuthContext);
   const history = useHistory();
 
-
   const logoutHandler = () => {
     authCtx.logout();
-    history.replace('/Login');
+    history.replace("/Login");
   };
 
   return (
     <Card
-      className="py-5 px-4 bg-light"
       sticky
-      style={{
-        position: "fixed",
-        top: "25px",
-        left: "25px",
-        height: "94vh",
-        width: "250px",
-      }}
+      className={`py-5 px-4 bg-light ${classes.sideBarCard}`}
     >
       <Card.Title>Komf</Card.Title>
       <Nav
@@ -33,15 +26,18 @@ const SideBar = () => {
         className="flex-column mt-4"
       >
         <Nav.Item>
-          {/* <Nav.Link to="/" eventKey="link-0" >Profile</Nav.Link> */}
           <Nav.Link>
             <Link to="/Profile">Profile </Link>
           </Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          {/* <Nav.Link to="/Login" eventKey="link-1">Exam</Nav.Link> */}
           <Nav.Link>
             <Link to="/Exam">Exam </Link>
+          </Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link>
+            <Link to="/Quiz">Quiz </Link>
           </Nav.Link>
         </Nav.Item>
       </Nav>

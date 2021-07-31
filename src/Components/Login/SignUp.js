@@ -1,10 +1,10 @@
 import { Card, Button, Form } from "react-bootstrap";
-import Background from "../../bg.jpeg";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useHistory } from "react-router";
 import { useContext, useRef } from "react";
 import AuthContext from "../../context/auth-context";
+import classes from "./Auth.module.css";
 
 const SignUp = () => {
   const history = useHistory();
@@ -31,7 +31,6 @@ const SignUp = () => {
     axios
       .post(`https://api.komf.ir/api/register`, details)
       .then((res) => {
-        
         // localStorage.setItem("TOKEN_STORAGE", res.data.token);
         authCtx.login(res.data.token);
         authCtx.setData(
@@ -42,22 +41,12 @@ const SignUp = () => {
           res.data.data.role
         );
         history.replace("/Profile");
-    })
+      })
       .catch((err) => console.log(err));
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        height: "100vh",
-        backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7)),url(${Background})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
-    >
+    <div className={classes["form-styles"]}>
       <Card style={{ width: "25rem" }} className="text-center">
         <Card.Title className="display-6 mt-4 mb-2">Signup Account</Card.Title>
         <Card.Title className="h6 font-weight-light">

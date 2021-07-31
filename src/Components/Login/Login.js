@@ -1,23 +1,14 @@
 import { Card, Button, Form } from "react-bootstrap";
-import Background from "../../bg.jpeg";
+import classes from "./Auth.module.css";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 import { useRef, useContext } from "react";
 import AuthContext from "../../context/auth-context";
-import { Modal } from "react-bootstrap";
-import { useState } from "react";
 
 const Login = () => {
   const emailInput = useRef();
   const passInput = useRef();
   const history = useHistory();
-
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => {
-    setShow(true);
-  };
 
   const authCtx = useContext(AuthContext);
 
@@ -42,34 +33,10 @@ const Login = () => {
         }
       })
       .catch((err) => console.log(err));
-
-      handleShow();
-  };
-
-  const setMessage = (str) => {
-    if (str !== "") {
-      return (
-        <Modal.Body>
-          Wellcome to KOMF your Logged in with this email :{authCtx.email}
-        </Modal.Body>
-      );
-    } else {
-      return <Modal.Body>please enter your information !</Modal.Body>;
-    }
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        height: "100vh",
-        backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7)),url(${Background})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
-    >
+    <div className={classes["form-styles"]}>
       <Card style={{ width: "25rem" }} className="text-center">
         <Card.Title className="display-6 mt-4 mb-2">Login Account</Card.Title>
         <Card.Title className="h6 font-weight-light">
@@ -105,7 +72,7 @@ const Login = () => {
               <Button variant="light" type="submit" className="text-muted">
                 Forgot password
               </Button>
-              <Button variant="primary" type="submit" onClick={handleShow}>
+              <Button variant="primary" type="submit">
                 Submit
               </Button>
             </Form.Group>
@@ -118,23 +85,6 @@ const Login = () => {
           </p>
         </Card.Body>
       </Card>
-
-      <Modal
-        show={show}
-        onHide={handleClose}
-        backdrop="static"
-        keyboard={false}
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>Hi {authCtx.fname}</Modal.Title>
-        </Modal.Header>
-        {setMessage(authCtx.email)}
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            OK
-          </Button>
-        </Modal.Footer>
-      </Modal>
     </div>
   );
 };

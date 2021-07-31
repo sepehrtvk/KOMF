@@ -7,7 +7,7 @@ import SideBar from "../SideBar/SideBar";
 const Exam = () => {
   const init = [
     {
-      description: "des",
+      description: "exam test",
       reading: 10,
       writing: 10,
       listening: 10,
